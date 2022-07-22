@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--    指定全局配置文件-->
+<!--    <properties resource="db.properties"/>-->
+    <!--    指定数据源驱动包-->
+    <classPathEntry
+            location="D:\\document\\maven repository\\mysql\\mysql-connector-java\\8.0.29\\mysql-connector-java-8.0.29.jar"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--        用于引入一些插件对代码生成的一些特性进行扩展-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--        生成的实体的注释内容-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+<!--            <property name="dateFormat" value="java.util.Date#toString()"/>-->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--        数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/security?useUnicode=true&amp;characterEncoding=utf8"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!--        数据库类型与java类型的映射-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+            <property name="useJSR310Types" value="false"/>
+        </javaTypeResolver>
+        <!--        Model类的生成行为-->
+        <javaModelGenerator targetPackage="cn.guzx.model" targetProject="src/main/java">
+            <property name="constructorBased" value="true"/>
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="exampleTargetPackage" value="cn.guzx.model.example"/>
+            <property name="exampleTargetProject" value="src/main/java"/>
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+        <!--        控制XML映射文件-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--        控制Mapper接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.guzx.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="useLegacyBuilder" value="false"/>
+            <!--            为生成的Mapper接口添加父接口-->
+            <!--            <property name="rootInterface" value=""/>-->
+        </javaClientGenerator>
+        <!--        生成代码的数据库表格-->
+        <table schema="security" tableName="sys_user" domainObjectName="SysUser" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableSelectByExample="true" enableUpdateByPrimaryKey="true"
+               enableUpdateByExample="true" enableDeleteByPrimaryKey="true" enableDeleteByExample="true"
+               enableCountByExample="true" selectByPrimaryKeyQueryId="true" selectByExampleQueryId="true">
+            <property name="constructorBased" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+            <!--            指定主键生成规则-->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!--            指定实体类重命名规则-->
+            <!--            <domainObjectRenamingRule searchString="^Sys" replaceString="" />-->
+            <!--            <columnOverride column="username" property="username" javaType="" jdbcType="" typeHandler="" delimitedColumnName="false" isGeneratedAlways="true"/>-->
+            <columnOverride column="username" property="username" delimitedColumnName="false" isGeneratedAlways="true"/>
+            <columnOverride column="password" property="password" delimitedColumnName="false" isGeneratedAlways="true"/>
+            <columnOverride column="account_expired" property="accountExpired" delimitedColumnName="false"
+                            isGeneratedAlways="true"/>
+            <columnOverride column="account_locked" property="accountLocked" delimitedColumnName="false"
+                            isGeneratedAlways="true"/>
+            <columnOverride column="credentials_expired" property="credentialsExpired" delimitedColumnName="false"
+                            isGeneratedAlways="true"/>
+            <columnOverride column="enable" property="enable" delimitedColumnName="false" isGeneratedAlways="true"/>
+            <!--            指定忽略生成的列-->
+            <!--            <ignoreColumn column=""/>-->
+        </table>
+    </context>
+</generatorConfiguration>
